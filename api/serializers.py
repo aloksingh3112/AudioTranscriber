@@ -39,5 +39,5 @@ class UserSerializerWithToken(serializers.ModelSerializer):
 
 class AudioSerializer(serializers.ModelSerializer):
     class Meta:
-        models: Audio
-        fields: '__all__'
+        model = Audio
+        fields = '__all__'

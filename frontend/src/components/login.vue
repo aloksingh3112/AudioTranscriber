@@ -44,6 +44,7 @@
 import { required } from "vuelidate/lib/validators";
 import axios from "axios";
 import { LOGIN } from "../config/url";
+import getToken from "../utils/jwt";
 export default {
   name: "Login",
   data: function() {
@@ -61,6 +62,12 @@ export default {
     user: {
       username: { required },
       password: { required }
+    }
+  },
+  created() {
+    const token = localStorage.getItem("token");
+    if (getToken(token)) {
+      this.$router.push("/");
     }
   },
   methods: {

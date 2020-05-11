@@ -59,6 +59,8 @@
 import { required, email, minLength } from "vuelidate/lib/validators";
 import axios from "axios";
 import { SIGN_UP } from "../config/url";
+import getToken from "../utils/jwt";
+
 export default {
   name: "Signup",
   data: function() {
@@ -104,14 +106,22 @@ export default {
             this.error = true;
             this.errorMessage = responseData.data.message;
           } else {
-            console.log(responseData.data.data.token);
             localStorage.setItem("token", responseData.data.data.token);
-            this.$router.push("/home");
+            this.$emit("setAuth", true);
+            this.$router.push("/");
           }
         })
         .catch(err => {
           console.log(err);
+          this.error = true;
+          this.errorMessage = "Something went wrong";
         });
+    }
+  },
+  created() {
+    const token = localStorage.getItem("token");
+    if (getToken(token)) {
+      this.$router.push("/");
     }
   }
 };

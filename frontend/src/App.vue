@@ -2,7 +2,7 @@
   <div class="app">
     <Header :isAuthenticated="isAuthenticated" @setAuth="setAuth($event)"></Header>
     <div class="container routerView">
-      <router-view></router-view>
+      <router-view @setAuth="setAuth($event)"></router-view>
     </div>
   </div>
 </template>
@@ -33,6 +33,7 @@ export default {
   },
   methods: {
     setAuth(data) {
+      console.log(data);
       this.isAuthenticated = data;
     }
   }

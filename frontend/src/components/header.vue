@@ -7,14 +7,18 @@
       <router-link
         to="/login"
         class="navbar-brand text-dark font-weight-bold links"
-        v-if="!isAuth"
+        v-if="!isAuthenticated"
       >Login</router-link>
       <router-link
         to="/signup"
         class="navbar-brand text-dark font-weight-bold links"
-        v-if="!isAuth"
+        v-if="!isAuthenticated"
       >Signup</router-link>
-      <a class="navbar-brand text-dark font-weight-bold links" v-if="isAuth">logout</a>
+      <a
+        class="navbar-brand text-dark font-weight-bold links"
+        v-if="isAuthenticated"
+        v-on:click="logout"
+      >logout</a>
     </div>
   </nav>
 </template>
@@ -25,10 +29,13 @@ export default {
   props: {
     isAuthenticated: Boolean
   },
-  data: function() {
-    return {
-      isAuth: this.isAuthenticated
-    };
+
+  methods: {
+    logout() {
+      this.$emit("setAuth", false);
+      localStorage.removeItem("token");
+      this.$router.push("/login");
+    }
   }
 };
 </script>

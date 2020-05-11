@@ -39,10 +39,17 @@ class Signup(APIView):
 
 
 @api_view(['GET'])
-def AudioList(request):
+def AudioLists(request):
     audios = Audio.objects.all()
     serializer = AudioSerializer(audios, many=True)
-    return Response({"data": serializer.data, "message": "Audio created successfully", "statusCode": 200}, status=status.HTTP_200_OK, )
+    return Response({"data": serializer.data, "message": "Audio fetch successfully", "statusCode": 200}, status=status.HTTP_200_OK, )
+
+
+@api_view(['GET'])
+def AudioList(request, pk):
+    audio = Audio.objects.get(id=pk)
+    serializer = AudioSerializer(audio, many=False)
+    return Response({"data": serializer.data, "message": "Audio fetch successfully", "statusCode": 200}, status=status.HTTP_200_OK, )
 
 
 @api_view(['POST'])

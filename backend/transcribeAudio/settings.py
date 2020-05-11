@@ -73,7 +73,7 @@ CORS_ORIGIN_WHITELIST = (
 )
 JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'transcribeAudio.utils.my_jwt_response_handler',
-    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=1),
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
 
 }
 TEMPLATES = [

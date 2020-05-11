@@ -34,7 +34,7 @@
         </div>
       </div>
 
-      <button type="button" class="btn btn-primary" @click.prevent="submitData">Submit</button>
+      <button type="submit" class="btn btn-primary" @click.prevent="submitData">Submit</button>
       <div class="alert alert-danger mt-2" v-if="error">{{errorMessage}}</div>
     </form>
   </div>
@@ -84,7 +84,8 @@ export default {
         .then(responseData => {
           console.log(responseData.data.token);
           localStorage.setItem("token", responseData.data.token);
-          this.$router.push("/home");
+          this.$emit("setAuth", true);
+          this.$router.push("/");
         })
         .catch(err => {
           console.log("err", err);

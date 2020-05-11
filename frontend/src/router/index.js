@@ -3,7 +3,6 @@ import VueRouter from "vue-router";
 import Home from "../components/home";
 import Login from "../components/login";
 import Signup from "../components/signup";
-import Transcribe from "../components/transcribe";
 
 Vue.use(VueRouter);
 
@@ -20,10 +19,6 @@ const router = new VueRouter({
     {
       path: "/signup",
       component: Signup,
-    },
-    {
-      path: "/transcribe",
-      component: Transcribe,
     },
   ],
   mode: "history",

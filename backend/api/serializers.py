@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 from django.contrib.auth.models import User
-from .models import Audio
+from .models import Audio, CharacterSet
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -40,4 +40,11 @@ class UserSerializerWithToken(serializers.ModelSerializer):
 class AudioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Audio
+        fields = '__all__'
+
+
+class CharacterSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = CharacterSet
         fields = '__all__'

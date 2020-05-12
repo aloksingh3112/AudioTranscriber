@@ -14,3 +14,10 @@ class Audio(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class CharacterSet(models.Model):
+    text = models.CharField(max_length=1000, null=True)
+
+    def __str__(self):
+        return self.text

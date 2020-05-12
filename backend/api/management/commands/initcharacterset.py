@@ -14,8 +14,8 @@ class Command(BaseCommand):
             with open(os.path.join(data_folder, data_file), encoding='utf-8') as data_file:
                 data = json.loads(data_file.read())
                 for data_object in data:
-                    id = data_object.get('id', None)
-                    text = data_object.get('text', None)
+                    id = data_object['id']
+                    text = data_object['text']
                     try:
                         characterset, created = CharacterSet.objects.update_or_create(
                             id=id,

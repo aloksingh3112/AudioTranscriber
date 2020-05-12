@@ -15,12 +15,11 @@ class Command(BaseCommand):
             with open(os.path.join(data_folder, data_file), encoding='utf-8') as data_file:
                 data = json.loads(data_file.read())
                 for data_object in data:
-                    id = data_object.get('id', None),
-                    title = data_object.get('title', None)
-                    audioLink = data_object.get('audioLink', None)
+                    title = data_object['title']
+                    audioLink = data_object['audioLink']
                     try:
                         audio, created = Audio.objects.update_or_create(
-                            id=id,
+                            id=data_object['id'],
                             defaults={
                                 'title': title,
                                 'audioLink': audioLink,
@@ -38,7 +37,5 @@ class Command(BaseCommand):
                         print(msg)
 
     def handle(self, *args, **options):
-        """
-        Call the function to import data
-        """
+
         self.import_audio_from_file()

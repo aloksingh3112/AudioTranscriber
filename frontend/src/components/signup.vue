@@ -102,19 +102,17 @@ export default {
         .post(SIGN_UP, data)
         .then(responseData => {
           console.log(responseData);
-          if (responseData.data.statusCode > 300) {
-            this.error = true;
-            this.errorMessage = responseData.data.message;
-          } else {
-            localStorage.setItem("token", responseData.data.data.token);
-            this.$emit("setAuth", true);
-            this.$router.push("/");
-          }
+
+          localStorage.setItem("token", responseData.data.data.token);
+          this.$emit("setAuth", true);
+          this.$router.push("/");
         })
         .catch(err => {
-          console.log(err);
+          console.log("err", err.response);
           this.error = true;
-          this.errorMessage = "Something went wrong";
+          this.errorMessage = err.response
+            ? err.response.data.message
+            : "Something went wrong";
         });
     }
   },

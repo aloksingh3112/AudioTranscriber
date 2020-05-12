@@ -93,7 +93,7 @@ export default {
           this.$emit("changeData", true);
         })
         .catch(err => {
-          console.log(err);
+          alert(err.response.data.message);
         });
     }
   }

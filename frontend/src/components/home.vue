@@ -34,7 +34,6 @@ export default {
             : ""
         }
       };
-      console.log("hello", OPTIONS);
 
       axios
         .get(GET_AUDIO, OPTIONS)
@@ -42,8 +41,7 @@ export default {
           console.log(responseData);
           this.audioData = [...responseData.data.data];
         })
-        .catch(err => {
-          console.log("error", err);
+        .catch(() => {
           localStorage.removeItem("token");
           this.$router.push("/login");
         });

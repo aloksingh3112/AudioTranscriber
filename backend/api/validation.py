@@ -4,10 +4,11 @@ from .serializers import CharacterSerializer
 
 
 def ValidateSet(text):
-    charData = CharacterSet.objects.all()
-    serializer = CharacterSerializer(charData, many=True)
-    charSet = serializer.data[0]['text']
-    valid_chars = set(charSet)
+    # charData = CharacterSet.objects.all()
+    # serializer = CharacterSerializer(charData, many=True)
+    # charSet = serializer.data[0]['text']
+    valid_chars = set(
+        '()&#39;aA-àÀ?âÂ,bB.cC;çÇ:dD!eEéÉèÈêÊëfFgGhHiIîÎïjJkKlLmMnNoOôÔpPqQrRsStTuUùûvVwWxXyYzZ [NB:')
     if all(char in valid_chars for char in text):
         return True
     else:

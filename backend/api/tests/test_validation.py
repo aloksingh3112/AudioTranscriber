@@ -5,18 +5,33 @@ from api.validation import ValidateCaps, ValidationSpace, ValidateStringTerminat
 class TestValidation(SimpleTestCase):
 
     def testValidateSet(self):
-        print(self)
-        self.assertEquals(ValidateSet("My name is \\\ alok"), True)
+        self.assertEqual(ValidateSet("My name is \\\ alok"), False)
+        self.assertEqual(ValidateSet("My name is alok"), True)
 
     def testValidateCaps(self):
-        print(self)
-        self.assertEquals(ValidateCaps("My name is alok"), True)
+        self.assertEqual(ValidateCaps("My name is alok"), True)
+        self.assertEqual(ValidateCaps("My name is Alok"), True)
+        self.assertEqual(ValidateCaps("My name is ALok"), False)
+        self.assertEqual(ValidateCaps("My name is ALOK"), True)
 
     def testValidationSpace(self):
-        self.assertEquals(ValidationSpace("My name is  alok"), False)
+        self.assertEqual(ValidationSpace("My name is  alok"), False)
+        self.assertEqual(ValidationSpace("My name is alok"), True)
 
     def testValidateStringTerminators(self):
-        self.assertEquals(ValidateStringTerminators("My name is alok."), True)
+        self.assertEqual(ValidateStringTerminators("My name is alok."), True)
+        self.assertEqual(ValidateStringTerminators("My name is alok?"), True)
+        self.assertEqual(ValidateStringTerminators("My name is alok!"), True)
+        self.assertEqual(ValidateStringTerminators(
+            "My name is alok. "), False)
+        self.assertEqual(ValidateStringTerminators("My name. Is alok."), True)
+        self.assertEqual(ValidateStringTerminators(
+            "My name. is alok."), False)
 
     def testValidateStringPausers(self):
-        self.assertEquals(ValidateStringPausers("My name is alok,"), False)
+        self.assertEqual(ValidateStringPausers("My name is alok, "), False)
+        self.assertEqual(ValidateStringPausers("My name is alok; "), False)
+        self.assertEqual(ValidateStringPausers("My name is alok: "), False)
+        self.assertEqual(ValidateStringPausers("My name is alok:"), True)
+        self.assertEqual(ValidateStringPausers("My name is alok,"), True)
+        self.assertEqual(ValidateStringPausers("My name, is alok,"), True)
